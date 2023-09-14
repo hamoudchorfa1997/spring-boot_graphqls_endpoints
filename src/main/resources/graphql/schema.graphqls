@@ -1,0 +1,63 @@
+type Query {
+        listOfCohorts: [cohort],
+        listOfProjects:[project],
+        listOfStages:[stage],
+        listOfUsers:[user],
+        getCohortById(cohortId: Int): cohort,
+        getProjectById(projectId: Int ): project,
+        getStageById(stageId: Int): stage,
+        getUserById(userId: Int):user,
+        getCohortByProjectId(projectId: Int):[cohort]
+}
+
+type user {
+    userId: String!,
+    userName: String!,
+    TimeSpentInProject: Float!,
+
+}
+
+type stage {
+    StageId: Int!,
+    StageName: StageName!,
+    StageStatus: StageStatus!,
+    CohortId: Int!,
+    ProjectID:  String!,
+    StageStartDate:  String!,
+    StageEndDate:  String!,
+    UsersIn: Int!,
+    UsersOut: Int!,
+    StageMembers: [user]!,
+    NumberOfMembers: Int!,
+}
+
+type cohort {
+    CohortId: Int!,
+    users:  [user],
+    projectId:Int,
+    CohortName:  String,
+    CohortStartDate: String,
+    CohortEndDate: String,
+    numberOfCompletedStages: Int,
+}
+
+type project {
+    ProjectId:  Int!,
+    ProjectName:  String,
+    listOfCohorts:[cohort],
+    NumberOfActiveCohorts: Int,
+    NumberOfCompletedCohorts: Int,
+}
+
+enum StageStatus {
+    IDLE,
+    ACTIVE,
+    COMPLETED
+}
+
+enum StageName {
+    SIGN_UP,
+    ONBOARDING,
+    D7
+    D30
+}
